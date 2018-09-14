@@ -1,13 +1,11 @@
 <?php
 
 //$verbindung = mysql_connect("localhost","root","");
-$verbindung = new mysqli('localhost', 'root', '', 'securitygame');
-//mysql_select_db ("securitygame", $verbindung);
+$verbindung = new mysqli('localhost', 'root', 'root', 'securitygame');
+
 if (!$verbindung) {
    exit ( "keine Verbindung möglich");
-   } else {
-       echo "Verbunden";
-   }
+   };
 
 //Formular-Daten auslesen
 
