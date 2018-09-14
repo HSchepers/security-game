@@ -1,14 +1,17 @@
 <?php
 
-$verbindung = mysql_connect("localhost","root","");
-mysql_select_db ("Nordwind", $verbindung);
+//$verbindung = mysql_connect("localhost","root","");
+$verbindung = new mysqli('localhost', 'root', '', 'securitygame');
+//mysql_select_db ("securitygame", $verbindung);
 if (!$verbindung) {
    exit ( "keine Verbindung möglich");
+   } else {
+       echo "Verbunden";
    }
 
 //Formular-Daten auslesen
 
-
+/*
 
 //Abfrage
 
@@ -37,5 +40,5 @@ while ($datensatz= mysql_fetch_array($ergebnis))  {
 
 // Serververbindung schließen
 mysql_close($verbindung);
-
+*/
 ?>
