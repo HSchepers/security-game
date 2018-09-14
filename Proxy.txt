@@ -1,0 +1,15 @@
+﻿Virtuellen Host einrichten
+E:\xampp\apache\conf\extra\httpd-vhosts.conf
+
+<VirtualHost *:80>
+    <Location /nodejsAppli>
+      ProxyPass http://127.0.0.1:3000
+      ProxyPassReverse http://127.0.0.1:3000
+    </Location> 
+</VirtualHost>
+
+-------------------------------------------------------
+Proxy-Modul
+E:\xampp\apache\conf\http.conf
+
+LoadModule proxy_http_module modules/mod_proxy_http.so
