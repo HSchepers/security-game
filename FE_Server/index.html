@@ -9,20 +9,20 @@
 </head>
 
 <body>
-    <div html-includes="/GitProjects/security-game/test.html"></div>
+    <div html-includes="/GitProjects/security-game/FE_Server/includes/test.html"></div>
 
-    <form id="login_form" method="POST" action="login.php">
+    <form id="login_form" method="POST" action="http://localhost/nodejsAppli/login">
         <table align="center">
             <tr>
                 <td><h1>Login</h1></td>
             </tr>
             <tr>
                 <td><label for="username">Username</label></td>
-                <td><input type="text" name="username"></td>
+                <td><input type="text" name="username" value="HSchepers"></td>
             </tr>
             <tr>
                 <td><label for="password">Password</label></td>
-                <td><input type="password" name="password"></td>
+                <td><input type="password" name="password" value="Password123"></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Login"></td>
