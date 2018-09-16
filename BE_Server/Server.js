@@ -59,20 +59,18 @@ app.post('/login', URLencodedParser, function (req, res) {
     console.log("Connected to Database");
 
     //var sql = 'select count(user) from users where user = "HSchepers" and auth_string = password("Password123")';
-    var sql = 'select * from securitygame.scores';
+    var sql = 'select F_users_user as user, score from securitygame.scores order by score desc';
 
-    var result = connection.query(sql, function (err, rows, fields) {
+    connection.query(sql, function (err, rows, fields) {
       if (err) throw err;
-
       console.log(rows);
-
-      return rows;
+      
+      res.writeHead(200, content.json);
+      res.end(JSON.stringify(rows));  
     });
+    
     connection.end();
   });
-  //res.writeHead(200, content.json);
-  
-  res.end();
 });
 
 app.listen(3000);
