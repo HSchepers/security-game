@@ -1,12 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterModule, Routes } from '@angular/router';
+import { MatButtonModule, MatCheckboxModule,MatGridListModule,MatInputModule,MatIconModule,MatListModule, MatToolbarModule,
+  MatCardModule, MatMenuModule, MatSidenavModule, MatExpansionModule, MatChipsModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { RouterModule, Routes } from '@angular/router';
-import { MatButtonModule, MatInputModule, MatIconModule, MatListModule, MatToolbarModule, MatCardModule, MatMenuModule, MatSidenavModule } from '@angular/material';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +30,10 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
+    BrowserAnimationsModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatGridListModule,
     MatInputModule,
     MatIconModule,
     MatListModule,
@@ -34,7 +41,11 @@ const appRoutes: Routes = [
     MatCardModule,
     MatMenuModule,
     MatSidenavModule,
-    RouterModule
+    MatExpansionModule,
+    MatChipsModule,
+    RouterModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

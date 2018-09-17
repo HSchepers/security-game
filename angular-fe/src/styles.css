@@ -1,3 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 	
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+/*needed for the 12 column grid layout*/
+@import "m-modified.css";
+
+/*needed to prevent default margin of body */
+body{
+    margin: 0;
+}
