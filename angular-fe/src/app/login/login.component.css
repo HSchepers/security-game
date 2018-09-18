@@ -1,0 +1,11 @@
+#content{
+    margin: auto; 
+}
+
+.list-item {
+    margin: 5px;
+}
+
+.form-field {
+    align-self: center
+}

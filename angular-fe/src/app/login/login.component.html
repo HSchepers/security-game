@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col m4 s12"></div>
+  <div class="col m4 s12">
+    <form name="login-form" (ngSubmit)="onLogin($event)">
+
+      <mat-list>
+        <mat-list-item>
+          <h4>Login</h4>
+        </mat-list-item>
+
+        <mat-list-item class="list-item">
+          <mat-form-field class="form-field">
+            <input name="username" [(ngModel)]="username" matInput placeholder="username">
+            <button mat-button *ngIf="username" matSuffix mat-icon-button aria-label="Clear" (click)="username=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item class="list-item">
+          <mat-form-field class="form-field">
+            <input name="password" [(ngModel)]="password" type="password" matInput placeholder="password">
+            <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item class="list-item">
+          <button mat-raised-button type="submit">
+            <mat-icon>input</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+
+    </form>
+  </div>
+  <div class="col m4 s12"></div>
+</div>
