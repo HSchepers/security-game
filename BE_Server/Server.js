@@ -7,7 +7,7 @@ const mysql = require('mysql');
 var app = express();
 var URLencodedParser = bodyParser.urlencoded({ extended: false })
 
-//--MIDDLEWARE--------------------------------------------------------------
+//--MIDDLEWARE-----------------------------------------------------------------
 //This piece of middleware will log the requests
 app.use('/', function (req, res, next) {
   console.log('Request: ' + req.url);
@@ -37,31 +37,13 @@ app.use(bodyParser.json());
 //serve the requested file
 app.use('/assets', express.static('assets'));
 
-//--GET-REQUESTS------------------------------------------------------------
+//--GET-REQUESTS---------------------------------------------------------------
 app.get('/', function (req, res) {
   res.writeHead(200, content.plain);
   res.end('This is the Back-End-Server');
 });
 
-app.get('/jsontest', function (req, res) {
-  var myObject = {
-    name: 'Henning',
-    age: 21,
-    location: 'Germany',
-  };
-
-  res.writeHead(200, content.json);
-  res.end(JSON.stringify(myObject));
-});
-
-//Dynamic Routing for everything that doesn't use one of the above
-app.get('/:file', function (req, res) {
-  res.writeHead(200, content.html);
-  var myReadStream = fs.createReadStream(__dirname + '/404.html', 'utf8');
-  myReadStream.pipe(res);
-});
-
-//--POST-REQUESTS-----------------------------------------------------------
+//--POST-REQUESTS--------------------------------------------------------------
 app.post('/login', URLencodedParser, function (req, res) {
   console.log('Body: ', req.body);
   
@@ -87,22 +69,30 @@ app.post('/login', URLencodedParser, function (req, res) {
       console.log(rows);
       
       if (rows[0].users == 1) {
-        var login = {
-          success: true,
-          message: 'Login successful'
-        };
+        console.log('Redirecting to the Game');
+        res.redirect('http://localhost:3000/game');
       } else {
+        console.log('Invalid login');
+        
         var login = {
           success: false,
           message: 'Login failed'
         };
+        res.writeHead(200, content.json);
+        res.end(JSON.stringify(login));
       };
-      res.writeHead(200, content.json);
-      res.end(JSON.stringify(login));
     });
   
     connection.end();
   });
 });
 
-app.listen(3000);
+//--404-Page-------------------------------------------------------------------
+//Dynamic Routing for everything that doesn't use one of the above
+app.all('/:file', function (req, res) {
+  res.writeHead(200, content.html);
+  fs.createReadStream(__dirname + '/404.html', 'utf8').pipe(res);
+});
+
+//Start server on Port 3001
+app.listen(3001);

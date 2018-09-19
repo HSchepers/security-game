@@ -2,16 +2,16 @@
 <html>
 
 <head>
-    <link href="Assets/bootstrap.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="html-includes.js"></script>
+    <link href="assets/bootstrap.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="scripts/html-includes.js"></script>
     <meta charset="UTF-8">
     <title>Security Game - Login</title>
 </head>
 
 <body>
-    <div html-includes="/GitProjects/security-game/FE_Server/includes/test.html"></div>
+    <div html-includes="includes/navigation.html"></div>
 
-    <form id="login_form" method="POST" action="http://localhost/nodejsAppli/login">
+    <form id="login_form" method="POST" action="http://localhost:3001/login">
         <table align="center">
             <tr>
                 <td><h1>Login</h1></td>
@@ -31,6 +31,7 @@
     </form>
 
 
+    <!--loading Components-->
     <script type="text/javascript">
         includeHTML();
     </script>
