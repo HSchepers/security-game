@@ -37,10 +37,10 @@ var config = {
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.spritesheet('floor', 'assets/floors.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-    this.load.spritesheet('laptop', 'assets/laptop.png', { frameWidth: 32, frameHeight: 54 });
-    this.load.image('sketch', 'assets/wiki-sketch.png', { frameWidth: 800, frameHeight: 600 });
+    this.load.spritesheet('floor', 'assets/images/floors.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('dude', 'assets/images/dude.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.spritesheet('laptop', 'assets/images/laptop.png', { frameWidth: 32, frameHeight: 54 });
+    this.load.image('sketch', 'assets/images/wiki-sketch.png', { frameWidth: 800, frameHeight: 600 });
 
 }
 

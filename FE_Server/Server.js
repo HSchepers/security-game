@@ -2,9 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const content = require('./custom_modules/content_types');
 const fs = require('fs');
+const array = require('./custom_modules/array_modules');
+
+//all routes that correspond to a .ejs-file with the same name
+//and do not require additional data to be displayed
+const routeMatchesView = ['game', 'about', 'help', 'denied'];
 
 var app = express();
-var URLencodedParser = bodyParser.urlencoded({ extended: false })
+var URLencodedParser = bodyParser.urlencoded({ extended: false });
+
+
 //setting EJS as rendering-engine
 app.set('view engine', 'ejs');
 
@@ -30,30 +37,31 @@ app.get('/', function (req, res) {
   res.end('This is the Front-End-Server');
 });
 
+//favicon.ico
+app.get('/favicon.ico', function(req, res){
+    res.end();
+});
+
 //home
 app.get('/home', function(req, res){
     res.render('index');
 });
 
-//game
-app.get('/game', function(req, res){
-    res.render('game');
+//login
+app.get('/login', function(req, res){
+    res.render('index');
 });
 
-//Handler for included Files
-app.get('/includes/:file', function(req, res){
-    res.writeHead(200, content.html);
-    fs.createReadStream(__dirname + '/includes/navigation.html', 'utf8').pipe(res);
+//Dynamic Routing for everything that doesn't use one of the above
+app.get('/:file', function (req, res) {
+    if (array.xInArray(routeMatchesView, req.params.file)){
+        res.render(req.params.file);
+    } else {
+        res.render('404', { file: req.params.file });
+    }
 });
 
 //--POST-REQUESTS--------------------------------------------------------------
-
-
-//--404-Page-------------------------------------------------------------------
-//Dynamic Routing for everything that doesn't use one of the above
-app.all('/:file', function (req, res) {
-
-});
 
 //Start server in Port 3000
 app.listen(3000);

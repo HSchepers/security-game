@@ -38,12 +38,14 @@ app.use(bodyParser.json());
 app.use('/assets', express.static('assets'));
 
 //--GET-REQUESTS---------------------------------------------------------------
+//verify that the server is online
 app.get('/', function (req, res) {
   res.writeHead(200, content.plain);
   res.end('This is the Back-End-Server');
 });
 
 //--POST-REQUESTS--------------------------------------------------------------
+//login
 app.post('/login', URLencodedParser, function (req, res) {
   console.log('Body: ', req.body);
   
@@ -73,13 +75,7 @@ app.post('/login', URLencodedParser, function (req, res) {
         res.redirect('http://localhost:3000/game');
       } else {
         console.log('Invalid login');
-        
-        var login = {
-          success: false,
-          message: 'Login failed'
-        };
-        res.writeHead(200, content.json);
-        res.end(JSON.stringify(login));
+        res.redirect('http://localhost:3000/denied');
       };
     });
   

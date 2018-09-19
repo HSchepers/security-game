@@ -13,15 +13,18 @@
     <form id="login_form" method="POST" action="http://localhost:3001/login">
         <table align="center">
             <tr>
-                <td><h1>Login</h1></td>
+                <td colspan="2"><h1>Login</h1></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span style="color: crimson">The given credentials were invalid!</span></td>
             </tr>
             <tr>
                 <td><label for="username">Username</label></td>
-                <td><input type="text" name="username" value="HSchepers"></td>
+                <td><input type="text" name="username" value=""></td>
             </tr>
             <tr>
                 <td><label for="password">Password</label></td>
-                <td><input type="password" name="password" value="Password123"></td>
+                <td><input type="password" name="password" value=""></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Login"></td>
