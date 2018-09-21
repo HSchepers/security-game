@@ -6,7 +6,7 @@ const array = require('./custom_modules/array_modules');
 
 //all routes that correspond to a .ejs-file with the same name
 //and do not require additional data to be displayed
-const routeMatchesView = ['game', 'about', 'help', 'denied'];
+const routeMatchesView = ['game', 'about', 'help'];
 
 var app = express();
 var URLencodedParser = bodyParser.urlencoded({ extended: false });
@@ -44,12 +44,17 @@ app.get('/favicon.ico', function(req, res){
 
 //home
 app.get('/home', function(req, res){
-    res.render('index');
+    res.render('index', { denied: '' });
 });
 
 //login
 app.get('/login', function(req, res){
-    res.render('index');
+    res.render('index', { denied: '' });
+});
+
+//denied
+app.get('/denied', function(req, res){
+    res.render('index', { denied: 'The given credentials were invalid!' });
 });
 
 //Dynamic Routing for everything that doesn't use one of the above
