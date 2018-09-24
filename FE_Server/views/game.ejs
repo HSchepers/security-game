@@ -6,40 +6,6 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <link href="assets/styles/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="assets/styles/game.css" rel="stylesheet" type="text/css">
-    <style>
-        body{
-            background-color: white;
-            margin: 0px;
-            font-family: 'Nunito Semibold';
-        }
-
-        #content{
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            grid-auto-rows: minmax( 0px, auto);
-            max-width: 100%;
-            margin: 0;
-            grid-template-areas:
-                "nav nav nav"
-                ". main ."
-                ". main ."
-                "footer footer footer";
-        }
-        #content > *{
-            padding: 5px;
-        }
-        main{
-            grid-area: main;
-            background-color: black;
-            min-height: 100px;
-        }
-        nav{
-            grid-area: nav;
-        }
-        footer{
-            grid-area: footer;
-        }
-    </style>
 </head>
 
 <body>

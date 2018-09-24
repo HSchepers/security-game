@@ -1,0 +1,28 @@
+#content{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    margin: 0px;
+    max-width: 100%;
+    grid-template-areas: 
+        "nav"
+        "main"
+        "footer"
+}
+#content > *{
+    padding: 5px;
+}
+.error{
+    color: crimson;
+}
+nav{
+    grid-area: nav;
+    align-self: start;
+}
+main{
+    grid-area: main;
+    padding: 50px;
+}
+footer{
+    grid-area: footer;
+    align-self: end;
+}

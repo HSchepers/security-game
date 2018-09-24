@@ -5,18 +5,22 @@
     <title>Security Game - Login</title>
     <meta charset="UTF-8">
     <link href="assets/styles/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/styles/index.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+    <div id='content'>
     <% include includes/nav.html %>
+    <% include includes/footer.html %>
 
+    <main>
     <form id="login_form" method="POST" action="http://localhost:3001/login">
         <table align="center">
             <tr>
                 <td colspan="2"><h1>Login</h1></td>
             </tr>
             <tr>
-                <td colspan="2"><span style="color: crimson"><%= denied %></span></td>
+                <td colspan="2"><span class='error'><%= denied %></span></td>
             </tr>
             <tr>
                 <td><label for="username">Username</label></td>
@@ -31,6 +35,8 @@
             </tr>
         </table>
     </form>
+    </main>
+    </div>
 </body>
 
 </html>

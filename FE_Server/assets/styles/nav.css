@@ -5,5 +5,5 @@ a {
     color: white;
 }
 .spacer {
-    flex: 1 1 auto;
+    padding: 10px;
 }
