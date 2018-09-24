@@ -1,0 +1,9 @@
+nav{
+    background-color: grey;
+}
+a {
+    color: white;
+}
+.spacer {
+    flex: 1 1 auto;
+}

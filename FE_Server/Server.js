@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const content = require('./custom_modules/content_types');
-const fs = require('fs');
+//const fs = require('fs');
 const array = require('./custom_modules/array_modules');
 
 //all routes that correspond to a .ejs-file with the same name
 //and do not require additional data to be displayed
-const routeMatchesView = ['game', 'about', 'help'];
+const routeMatchesView = ['game', 'about', 'help', 'developers', 'impressum'];
 
 var app = express();
 var URLencodedParser = bodyParser.urlencoded({ extended: false });
