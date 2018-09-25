@@ -14,21 +14,21 @@
     <% include includes/footer.html %>
 
     <main>
-    <form id="login_form" method="POST" action="http://localhost:3001/login">
+    <form id="login_form" method="POST" action="http://localhost:3000/login">
         <table align="center">
             <tr>
                 <td colspan="2"><h1>Login</h1></td>
             </tr>
             <tr>
-                <td colspan="2"><span class='error'><%= denied %></span></td>
+                <td colspan="2"><span class='error'><%= error %></span></td>
             </tr>
             <tr>
                 <td><label for="username">Username</label></td>
-                <td><input type="text" name="username" value=""></td>
+                <td><input type="text" name="username" value="HSchepers"></td>
             </tr>
             <tr>
                 <td><label for="password">Password</label></td>
-                <td><input type="password" name="password" value=""></td>
+                <td><input type="password" name="password" value="Password123"></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Login"></td>
