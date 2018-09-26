@@ -1,7 +1,7 @@
 footer{
     background-color: grey;
 }
-a {
+footer > a {
     color: white;
 }
 .spacer {

@@ -12,9 +12,21 @@
     <div id='content'>
     <% include includes/nav.html %>
     <% include includes/footer.html %>
-
     <main>
-    <form id="login_form" method="POST" action="http://localhost:3001/login">
+        <div id='nested'>
+            <div id='left'>
+                left
+            </div>
+            <div id='right'>
+                <div id='login'>Login</div>
+                <div id='scores'>Scores</div>
+            </div>
+        </div>
+    </main>
+    </div>
+</body>
+<!--
+        <form id="login_form" method="POST" action="http://localhost:3001/login">
         <table align="center">
             <tr>
                 <td colspan="2"><h1>Login</h1></td>
@@ -32,11 +44,9 @@
             </tr>
             <tr>
                 <td><input type="submit" value="Login"></td>
+                <td align="right"></td>
             </tr>
         </table>
-    </form>
-    </main>
-    </div>
-</body>
-
+        </form>
+-->
 </html>

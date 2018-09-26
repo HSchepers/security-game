@@ -1,7 +1,7 @@
 nav{
     background-color: grey;
 }
-a {
+nav > a {
     color: white;
 }
 .spacer {
