@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const content = require('./custom_modules/content_types');
 const fs = require('fs');
 const mysql = require('mysql');
+const session = require('express-session');
 
 var app = express();
 var URLencodedParser = bodyParser.urlencoded({ extended: false })
@@ -10,13 +11,13 @@ var URLencodedParser = bodyParser.urlencoded({ extended: false })
 //--MIDDLEWARE-----------------------------------------------------------------
 //This piece of middleware will log the requests
 app.use('/', function (req, res, next) {
-  console.log('Request: ' + req.url);
+  console.log(req.method + ': ' + req.url);
   next(); //next piece of middleware
 });
 
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   // Request headers you wish to allow
@@ -46,7 +47,7 @@ app.get('/', function (req, res) {
 
 //--POST-REQUESTS--------------------------------------------------------------
 //login
-app.post('/login', URLencodedParser, function (req, res) {
+app.post('/login', URLencodedParser, function(req, res) {
   console.log('Body: ', req.body);
   
   const username = req.body.username;
@@ -59,28 +60,38 @@ app.post('/login', URLencodedParser, function (req, res) {
     database: "securitygame"
   });
 
+  var data = {
+    success: false,
+    message: 'Could not connect to database'
+  };
+
   connection.connect(function (err) {
     if (err) throw err;
     console.log("Connected to Database");
+    data.message = 'SQL statement failed'
 
     var sql = 'select count(user) as users from users where user = "' + username + '" and auth_string = password("' + password + '")';
-    console.log(sql);
     
     connection.query(sql, function (err, rows, fields) {
       if (err) throw err;
       console.log(rows);
-      
+
       if (rows[0].users == 1) {
-        console.log('Redirecting to the Game');
-        res.redirect('http://localhost:3000/game');
+        //User was found
+        data.success = true;
+        data.message = 'Login successful';
       } else {
-        console.log('Invalid login');
-        res.redirect('http://localhost:3000/denied');
+        //User was not found
+        data.success = false;
+        data.message = 'Login failed';        
       };
+      console.log(data);
     });
-  
+
     connection.end();
   });
+  res.writeHead(200, content.json);
+  res.end(JSON.stringify(data));
 });
 
 //--404-Page-------------------------------------------------------------------
