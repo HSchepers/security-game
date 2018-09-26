@@ -7,14 +7,14 @@ const content = require('./custom_modules/content_types');
 const array = require('./custom_modules/array_modules');
 const session = require('express-session');
 const request = require('request');
+const constructors = require('./custom_modules/custom_constructors');
 
 //all routes that correspond to a .ejs-file with the same name
 //and do not require additional data to be displayed
-const routeMatchesView = ['game', 'about', 'help', 'developers', 'impressum'];
+const routeMatchesView = ['about', 'help', 'developers', 'impressum'];
 
 var app = express();
 var URLencodedParser = bodyParser.urlencoded({ extended: false });
-
 
 //setting EJS as rendering-engine
 app.set('view engine', 'ejs');
@@ -49,17 +49,12 @@ app.get('/favicon.ico', function (req, res) {
 
 //home
 app.get('/home', function (req, res) {
-    res.render('index', { error: '' });
+    res.render('index', constructors.json.index);
 });
 
 //login
 app.get('/login', function (req, res) {
-    res.render('index', { error: '' });
-});
-
-//denied
-app.get('/denied', function (req, res) {
-    res.render('index', { error: 'The given credentials were invalid!' });
+    res.render('index', constructors.json.index);
 });
 
 //Dynamic Routing for everything that doesn't use one of the above
@@ -81,21 +76,23 @@ app.post('/login', URLencodedParser, function (req, res) {
         password: req.body.password
     };
 
-    var http_response = {
-        success: false,
-        message: 'Could not request login service'
-    };
+    var http_response = constructors.json.index;
+    http_response.success = false;
+    http_response.message = 'Could not request login service';
+    http_response.restore.username = post_json.username;
+
 
     login_service(post_json).then(function (obj) {
         console.log(obj.body);
 
         http_response.success = obj.body.success;
         http_response.message = obj.body.message;
+        http_response.msg_type = obj.body.msg_type;
 
-        if(http_response.success){
+        if (http_response.success) {
             res.render('game');
         } else {
-            res.render('index', { message: http_response.message })
+            res.render('index', http_response);
         };
         res.end();
     });
@@ -112,7 +109,7 @@ app.listen(3000);
 let login_service = function (obj_json) {
     return new Promise(function (resolve, reject) {
         request.post('http://localhost:3001/login', { json: obj_json }, function (error, body) {
-                resolve(body);
+            resolve(body);
         });
     });
 };

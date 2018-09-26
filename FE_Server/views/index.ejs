@@ -4,12 +4,11 @@
 <head>
     <title>Security Game - Login</title>
     <meta charset="UTF-8">
-    <link href="assets/styles/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="assets/styles/index.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <div id='content'>
+    <div id='wrapper'>
     <% include includes/nav.html %>
     <% include includes/footer.html %>
     <main>
@@ -20,24 +19,23 @@
             <div id='right'>
                 <div id='login'>
                     <form id="login_form" method="POST" action="http://localhost:3000/login">
-                        <table align="center">
+                        <table>
                             <tr>
                                 <td colspan="2"><h1>Login</h1></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><span class='error'><%= message %></span></td>
+                                <td colspan="2"><span class='<%= msg_type %>'><%= message %></span></td>
                             </tr>
                             <tr>
                                 <td><label for="username">Username</label></td>
-                                <td><input type="text" name="username" value="HSchepers"></td>
+                                <td><input type="text" name="username" value="<%= restore.username %>"></td>
                             </tr>
                             <tr>
                                 <td><label for="password">Password</label></td>
-                                <td><input type="password" name="password" value="Password123"></td>
+                                <td><input type="password" name="password" value="<%= restore.password %>"></td>
                             </tr>
                             <tr>
-                                <td><input type="submit" value="Login"></td>
-                                <td align="right"></td>
+                                <td colspan="2"><input type="submit" value="   Login   "></td>
                             </tr>
                         </table>
                         </form>

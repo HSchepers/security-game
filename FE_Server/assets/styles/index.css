@@ -1,37 +1,13 @@
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-#content{
-    display: grid;
-    grid-template-rows: 10% 80% 10%;
-    margin: 0px;
-    grid-gap: 5px;
-    min-width: 100%;
-    min-height: 100vh;
-    grid-template-areas: 
-        "nav"
-        "main"
-        "footer";
-    background-color: black;
-}
-#content > *{
+@import url('base.css');
+
+td{
     padding: 5px;
 }
 .error{
     color: crimson;
 }
-nav{
-    grid-area: nav;
-    align-self: start;
-}
-main{
-    grid-area: main;
-}
-footer{
-    grid-area: footer;
-    align-self: end;
+.confirm{
+    color: limegreen;
 }
 #nested{
     display: grid;
@@ -48,7 +24,7 @@ footer{
     grid-area: left;
     margin: 0px;
     max-width: 100%;
-    background-color: limegreen;
+    background-color: cadetblue;
 }
 #nested > #right {
     grid-area: right;
@@ -64,10 +40,13 @@ footer{
 #nested > #right > #login{
     grid-area: login;
     margin: 0px;
-    background-color: limegreen;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    background-color: cadetblue;
 }
 #nested > #right > #scores{
     grid-area: scores;
     margin: 0px;
-    background-color: limegreen;
+    background-color: cadetblue;
 }

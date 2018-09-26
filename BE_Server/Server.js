@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const content = require('./custom_modules/content_types');
 const fs = require('fs');
 const mysql = require('mysql');
-const session = require('express-session');
+//const session = require('express-session');
+const constructors = require('./custom_modules/custom_constructors');
 
 var app = express();
 var URLencodedParser = bodyParser.urlencoded({ extended: false })
@@ -50,10 +51,10 @@ app.get('/', function (req, res) {
 app.post('/login', URLencodedParser, function (req, res) {
   console.log('User: ', req.body.username);
 
-  var data = {
-    success: false,
-    message: 'Could not connect to Database'
-  };
+  var data = constructors.json.login;
+  data.success = false;
+  data.message = 'Could not connect to Database';
+  data.msg_type = 'error';
 
   const username = req.body.username;
   const password = req.body.password;
@@ -67,11 +68,13 @@ app.post('/login', URLencodedParser, function (req, res) {
     if (result[0].users == 1) {
       //User found
       data.success = true;
-      data.message = 'Login successful';
+      data.message = 'Login successful!';
+      data.msg_type = 'confirm'
     } else {
       //User not found
       data.success = false;
-      data.message = 'The given credentials were invalid';
+      data.message = 'The given credentials were invalid!';
+      data.msg_type = 'error';
     };
 
     res.writeHead(200, content.json);
@@ -81,6 +84,7 @@ app.post('/login', URLencodedParser, function (req, res) {
     //Access failed
     data.success = false;
     data.message = msg;
+    data.msg_type = 'error';
     res.writeHead(200, content.json);
     res.end(JSON.stringify(data));
   });

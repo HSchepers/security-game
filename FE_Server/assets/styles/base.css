@@ -1,0 +1,42 @@
+@import url('bootstrap.css');
+
+*{
+    margin: 0;
+}
+#wrapper{
+    display: grid;
+    grid-template-rows: 1fr 25fr 1fr;
+    margin: 0px;
+    grid-gap: 5px;
+    min-width: 100%;
+    min-height: 100vh;
+    grid-template-areas: 
+        "nav"
+        "main"
+        "footer";
+}
+#wrapper > *{
+    padding: 5px;
+}
+nav{
+    grid-area: nav;
+    align-self: start;
+    background-color: grey;
+}
+main{
+    grid-area: main;
+}
+footer{
+    grid-area: footer;
+    align-self: end;
+    background-color: grey;
+}
+nav > a {
+    color: white;
+}
+footer > a {
+    color: white;
+}
+.spacer {
+    padding: 10px;
+}
