@@ -3,6 +3,8 @@ Registrierung
 Passwort ändern/vergessen
 Game wird nicht im Main angezeigt
 RegEx
+Farbige Messages
+nach fehlerhaftem Login restore Username
 
 Back-End:
 protected routes
