@@ -74,20 +74,45 @@ app.get('/:file', function (req, res) {
 //--POST-REQUESTS--------------------------------------------------------------
 //login
 app.post('/login', URLencodedParser, function (req, res) {
-    console.log(req.body);
+    console.log(req.body.username);
 
     const post_json = {
         username: req.body.username,
         password: req.body.password
     };
 
-    request.post('http://localhost:3001/login', { json: post_json }, function (error, response, body) {
-        if(error) throw error;
-        if(!(response.statusCode == 200)) throw response.statusCode;
-        res.send(body);
+    var http_response = {
+        success: false,
+        message: 'Could not request login service'
+    };
+
+    login_service(post_json).then(function (obj) {
+        console.log(obj.body);
+
+        http_response.success = obj.body.success;
+        http_response.message = obj.body.message;
+
+        if(http_response.success){
+            res.render('game');
+        } else {
+            res.render('index', { message: http_response.message })
+        };
         res.end();
     });
 });
 
 //Start server on Port 3000
 app.listen(3000);
+
+
+//--FUNCTIONS------------------------------------------------------------------
+
+
+//--PROMISES-------------------------------------------------------------------
+let login_service = function (obj_json) {
+    return new Promise(function (resolve, reject) {
+        request.post('http://localhost:3001/login', { json: obj_json }, function (error, body) {
+                resolve(body);
+        });
+    });
+};

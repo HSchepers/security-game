@@ -33,6 +33,7 @@ COMMENT = '	';
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `securitygame`.`users` (
   `user` VARCHAR(30) NOT NULL,
+  `mail` VARCHAR(50) NOT NULL,
   `auth_string` VARCHAR(100) NOT NULL,
   `F_roles_id` INT NOT NULL,
   PRIMARY KEY (`user`),

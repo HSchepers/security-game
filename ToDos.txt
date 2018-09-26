@@ -1,11 +1,8 @@
 Front-End:
 Registrierung
 Passwort ändern/vergessen
-Footer am unteren Ende
 Game wird nicht im Main angezeigt
 RegEx
 
 Back-End:
 protected routes
-Datenbank
-    zusätzlich E-Mail speichern
