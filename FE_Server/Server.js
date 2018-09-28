@@ -55,10 +55,10 @@ app.get('/favicon.ico', function (req, res) {
 app.get('/home', function (req, res) {
     /*If a cookie containig a username exists the user will be 
       redirected to '/game' otherwise to '/register' */
-    if (req.cookies.user.username == '') {
-        res.redirect('/register');
-    } else {
+    if (usernameIsSet(req.cookies.user)) {
         res.redirect('/game');
+    } else {
+        res.redirect('/register');
     };
 });
 
@@ -70,14 +70,14 @@ app.get('/game', function (req, res) {
     var data = constructors.json.else;
     data.header_text = getHeader(req.cookies.user);
 
-    if (req.cookies.user.username == '') {
-        var cookieData = constructors.cookie.message;
-        cookieData.message = 'You must enter a username before playing the game';
-        cookieData.msg_type = 'error';
-        res.cookie('msg', cookieData, {maxAge: 5000})
-        res.redirect('/register');
-    } else {
+    if (usernameIsSet(req.cookies.user)) {
         res.render('game', data);
+    } else {
+        var cookieData = constructors.cookie.msg;
+        cookieData.content = 'You must enter a username before playing the game';
+        cookieData.type = 'error';
+        res.cookie('msg', cookieData, { maxAge: 5000 })
+        res.redirect('/register');
     };
 });
 
@@ -86,13 +86,17 @@ app.get('/register', function (req, res) {
     /*The register-page is rendered displaying any message
       given in the msg-cookie */
     var data = constructors.json.index;
-    data.header_text = getHeader(req.cookies.user);    
-    
-    if (req.cookies.msg) {
-        data.message = req.cookies.msg.message;
-        data.msg_type = req.cookies.msg.msg_type;
-    };
+    data.header_text = getHeader(req.cookies.user);
+    data.msg = getMsg(req.cookies.msg);
+
+    res.clearCookie('msg');
     res.render('index', data);
+});
+
+//change_username
+app.get('/change_username', function (req, res) {
+    res.clearCookie('user');
+    res.redirect('/register');
 });
 
 //Dynamic Routing for everything that doesn't use one of the above
@@ -105,7 +109,7 @@ app.get('/:file', function (req, res) {
         var data = constructors.json.notFound;
         data.header_text = getHeader(req.cookies.user);
         data.file = req.params.file
-        res.render('404', data );
+        res.render('404', data);
     }
 });
 
@@ -123,12 +127,40 @@ app.listen(3000);
 
 
 //--FUNCTIONS------------------------------------------------------------------
-function getHeader(cookie){
-    const user = cookie.username;
-    if(user == ''){
-        return 'No username entered';
+function getHeader(cookie) {
+    if (cookie) {
+        const user = cookie.username;
+        if (user == '') {
+            return 'No username';
+        } else {
+            return 'Username: ' + user;
+        };
     } else {
-        return 'Current username: ' + user;
+        return 'No username';
+    }
+};
+
+function getMsg(cookie) {
+    var msg = constructors.json.index.msg;
+    if (cookie) {
+        msg.content = cookie.content;
+        msg.type = cookie.type;
+    } else {
+        msg.content = '';
+        msg.type = '';
+    };
+    return msg;
+};
+
+function usernameIsSet(cookie) {
+    if (cookie) {
+        if (cookie.username == '') {
+            return false;
+        } else {
+            return true;
+        };
+    } else {
+        return false;
     };
 };
 

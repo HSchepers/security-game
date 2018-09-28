@@ -5,11 +5,10 @@
 }
 #wrapper{
     display: grid;
-    grid-template-rows: 5% 90% 5%;
+    grid-template-rows: 1fr 2fr 1fr;
     margin: 0px;
     grid-gap: 5px;
     min-width: 100%;
-    min-height: 0;
     grid-template-areas: 
         "nav"
         "main"
@@ -18,26 +17,48 @@
 #wrapper > main,nav,footer{
     padding: 5px;
 }
+main{
+    grid-area: main;
+}
+
 nav{
     grid-area: nav;
     align-self: start;
     background-color: grey;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "left right";
+    text-align: auto;
+    grid-gap: 5px;
 }
-main{
-    grid-area: main;
+nav > #left{
+    grid-area: left;
+    border: 1px solid;
 }
+nav > #right{
+    grid-area: right;
+    border: 1px solid;
+}
+#home{
+    grid-area: home;
+}
+#user{
+    grid-area: user;
+}
+#change{
+    grid-area: change;
+}
+
 footer{
     grid-area: footer;
     align-self: end;
     background-color: grey;
 }
-nav > a,span {
-    color: white;
-}
-footer > a {
-    color: white;
-}
+
 .spacer {
     padding-left: 10px;
     padding-right: 10px;
+}
+a.nav,.foot{
+    color: white;
 }

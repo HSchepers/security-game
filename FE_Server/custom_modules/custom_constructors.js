@@ -1,8 +1,10 @@
 // Render-Data for Websites
 const indexJSON = {
     header_text: '',
-    message: '',
-    msg_type: '',
+    msg: {
+        content: '',
+        type: '',
+    },
 };
 
 const elseJSON = {
@@ -20,8 +22,8 @@ const cookieUserData = {
 };
 
 const cookieMsgData = {
-    message: '',
-    msg_type: '',
+    content: '',
+    type: '',
 };
 
 module.exports = {
@@ -32,6 +34,6 @@ module.exports = {
     },
     cookie: {
         user: cookieUserData,
-        message: cookieMsgData,
+        msg: cookieMsgData,
     },
 };
