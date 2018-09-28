@@ -116,10 +116,20 @@ app.get('/:file', function (req, res) {
 //--POST-REQUESTS--------------------------------------------------------------
 //register
 app.post('/register', URLencodedParser, function (req, res) {
-    var cookieData = constructors.cookie.user;
-    cookieData.username = req.body.username;
-    res.cookie('user', cookieData);
-    res.redirect('/game');
+    const username = new String(req.body.username);
+
+    if (username.length > 30) {
+        var cookieData = constructors.cookie.msg;
+        cookieData.content = 'The username mustn&apos;t be longer than 30 characters';
+        cookieData.type = 'error';
+        res.cookie('msg', cookieData, {maxAge: 5000});
+        res.redirect('/register');
+    } else {
+        var cookieData = constructors.cookie.user;
+        cookieData.username = username;
+        res.cookie('user', cookieData);
+        res.redirect('/game');
+    };
 });
 
 //Start server on Port 3000
@@ -137,7 +147,7 @@ function getHeader(cookie) {
         };
     } else {
         return 'No username';
-    }
+    };
 };
 
 function getMsg(cookie) {
@@ -173,9 +183,3 @@ let BackEndService = function (service, obj_json) {
         });
     });
 };
-/*
-let getHeader = function(){
-    return new Promise(function(resolve, reject){
-        resolve();
-    });
-};*/
