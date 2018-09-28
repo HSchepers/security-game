@@ -31,12 +31,13 @@ footer{
     align-self: end;
     background-color: grey;
 }
-nav > a {
+nav > a,span {
     color: white;
 }
 footer > a {
     color: white;
 }
 .spacer {
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }

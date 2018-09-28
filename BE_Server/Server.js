@@ -47,7 +47,47 @@ app.get('/', function (req, res) {
 });
 
 //--POST-REQUESTS--------------------------------------------------------------
-//login
+
+
+//--404-Page-------------------------------------------------------------------
+//Dynamic Routing for everything that doesn't use one of the above
+app.all('/:file', function (req, res) {
+  res.writeHead(200, content.html);
+  fs.createReadStream(__dirname + '/404.html', 'utf8').pipe(res);
+});
+
+//Start server on Port 3001
+app.listen(3001);
+
+//--FUNCTIONS------------------------------------------------------------------
+
+
+//--PROMISES-------------------------------------------------------------------
+let accessDatabase = function (sql) {
+  return new Promise(function (resolve, reject) {
+    var connection = mysql.createConnection({
+      host: "localhost",
+      user: "guest",
+      password: "login",
+      database: "securitygame"
+    });
+
+    connection.connect(function (err) {
+      if (err) throw err, reject('Connection failed');
+      console.log("Connected to Database");
+
+      connection.query(sql, function (err, rows, fields) {
+        if (err) throw err;
+
+        resolve(rows);
+      });
+      connection.end();
+    });
+  });
+};
+
+//--Dead Code------------------------------------------------------------------
+/*login
 app.post('/login', URLencodedParser, function (req, res) {
   console.log('User: ', req.body.username);
 
@@ -88,41 +128,4 @@ app.post('/login', URLencodedParser, function (req, res) {
     res.writeHead(200, content.json);
     res.end(JSON.stringify(data));
   });
-});
-
-//--404-Page-------------------------------------------------------------------
-//Dynamic Routing for everything that doesn't use one of the above
-app.all('/:file', function (req, res) {
-  res.writeHead(200, content.html);
-  fs.createReadStream(__dirname + '/404.html', 'utf8').pipe(res);
-});
-
-//Start server on Port 3001
-app.listen(3001);
-
-//--FUNCTIONS------------------------------------------------------------------
-
-
-//--PROMISES-------------------------------------------------------------------
-let accessDatabase = function (sql) {
-  return new Promise(function (resolve, reject) {
-    var connection = mysql.createConnection({
-      host: "localhost",
-      user: "guest",
-      password: "login",
-      database: "securitygame"
-    });
-
-    connection.connect(function (err) {
-      if (err) throw err, reject('Connection failed');
-      console.log("Connected to Database");
-
-      connection.query(sql, function (err, rows, fields) {
-        if (err) throw err;
-
-        resolve(rows);
-      });
-      connection.end();
-    });
-  });
-};
+});*/

@@ -1,8 +1,9 @@
-Front-End:
+﻿Front-End:
 Registrierung
 Passwort ändern/vergessen
 Game wird nicht im Main angezeigt
 RegEx
+Cookie-Mitteilung
 
 Back-End:
 protected routes
