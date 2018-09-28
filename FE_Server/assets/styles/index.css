@@ -9,7 +9,7 @@ td {
 .confirm{
     color: limegreen;
 }
-#nested{
+#wrapper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin: 0px;
@@ -20,6 +20,7 @@ td {
     grid-template-areas:
         "scores right";
 }
+
 #scores{
     grid-area: scores;
     margin: 0px;

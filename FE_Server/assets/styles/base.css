@@ -3,62 +3,44 @@
 *{
     margin: 0;
 }
-#wrapper{
-    display: grid;
-    grid-template-rows: 1fr 2fr 1fr;
-    margin: 0px;
-    grid-gap: 5px;
-    min-width: 100%;
-    grid-template-areas: 
-        "nav"
-        "main"
-        "footer";
-}
-#wrapper > main,nav,footer{
-    padding: 5px;
-}
 main{
-    grid-area: main;
+    background-color: cadetblue;
 }
-
+div{
+    border: 1px solid black;
+}
 nav{
-    grid-area: nav;
-    align-self: start;
+    position: sticky;
+    top: 0;
     background-color: grey;
+    border: 1px solid black;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: "left right";
-    text-align: auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "left . right";
     grid-gap: 5px;
 }
 nav > #left{
     grid-area: left;
-    border: 1px solid;
+    margin: auto;
+    margin-left: 0;
 }
 nav > #right{
     grid-area: right;
-    border: 1px solid;
-}
-#home{
-    grid-area: home;
-}
-#user{
-    grid-area: user;
-}
-#change{
-    grid-area: change;
+    margin: auto;
+    margin-right: 0;
 }
 
 footer{
-    grid-area: footer;
-    align-self: end;
+    position: sticky;
+    bottom: 0;
     background-color: grey;
+    border: 1px solid black;
 }
 
 .spacer {
     padding-left: 10px;
     padding-right: 10px;
 }
-a.nav,.foot{
+a.nav,a.foot,span.nav,span.foot{
     color: white;
 }
