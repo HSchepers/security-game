@@ -18,14 +18,15 @@ td {
     min-height: 100%;
     align-self: center;
     grid-template-areas:
-        "scores right";
+        "left right";
 }
-#scores{
-    grid-area: scores;
+#nested > #left {
+    grid-area: left;
     margin: 0px;
+    max-width: 100%;
     background-color: cadetblue;
 }
-#right {
+#nested > #right {
     grid-area: right;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
@@ -34,13 +35,18 @@ td {
     max-width: 100%;
     grid-template-areas:
         "login"
-        ".";
+        "scores";
 }
-#login{
+#nested > #right > #login{
     grid-area: login;
     margin: 0px;
     align-self: center;
     justify-self: center;
     text-align: center;
+    background-color: cadetblue;
+}
+#nested > #right > #scores{
+    grid-area: scores;
+    margin: 0px;
     background-color: cadetblue;
 }

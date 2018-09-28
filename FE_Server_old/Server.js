@@ -67,7 +67,36 @@ app.get('/:file', function (req, res) {
 });
 
 //--POST-REQUESTS--------------------------------------------------------------
-app.post
+//login
+app.post('/login', URLencodedParser, function (req, res) {
+    console.log(req.body.username);
+
+    const post_json = {
+        username: req.body.username,
+        password: req.body.password
+    };
+
+    var http_response = constructors.json.index;
+    http_response.success = false;
+    http_response.message = 'Could not request login service';
+    http_response.restore.username = post_json.username;
+
+
+    login_service(post_json).then(function (obj) {
+        console.log(obj.body);
+
+        http_response.success = obj.body.success;
+        http_response.message = obj.body.message;
+        http_response.msg_type = obj.body.msg_type;
+
+        if (http_response.success) {
+            res.render('game');
+        } else {
+            res.render('index', http_response);
+        };
+        res.end();
+    });
+});
 
 //Start server on Port 3000
 app.listen(3000);

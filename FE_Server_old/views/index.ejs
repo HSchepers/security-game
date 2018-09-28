@@ -18,17 +18,21 @@
             </div>
             <div id='right'>
                 <div id='login'>
-                    <form id="login_form" method="POST" action="http://localhost:3000/register">
+                    <form id="login_form" method="POST" action="http://localhost:3000/login">
                         <table class="login_table">
                             <tr>
-                                <td colspan="2"><h3>To play the Security-Game please enter a username</h3></td>
+                                <td colspan="2"><h1>Login</h1></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><span class='<%= msg_type %>'><%= message %></span></td>
                             </tr>
                             <tr>
                                 <td><label for="username">Username</label></td>
-                                <td><input type="text" name="username" value=""></td>
+                                <td><input type="text" name="username" value="<%= restore.username %>"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="password">Password</label></td>
+                                <td><input type="password" name="password" value="<%= restore.password %>"></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><input type="submit" value="   Login   "></td>
@@ -37,7 +41,7 @@
                         </form>
                 </div>
                 <div id=''>
-                    empty tile
+
                 </div>
             </div>
         </div>
