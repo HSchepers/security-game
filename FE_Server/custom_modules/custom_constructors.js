@@ -5,7 +5,9 @@ const indexJSON = {
         content: '',
         type: '',
     },
-    scores: [],
+    scores: [
+        { user: '', score: 0,},
+    ],
 };
 
 const elseJSON = {

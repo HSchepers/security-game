@@ -23,13 +23,9 @@ module.exports = function (app) {
             var data = [];
 
             for (let i = 0; i < rows.length; i++) {
-                const row = rows[i];
-                var entry = constructors.json.score;
-                entry.user = row.user;
-                entry.score = row.score;
+                const entry = rows[i];
                 data.push(entry);
             };
-            console.log('\n', data);
 
             res.setHeader("200", content.json);
             res.end(JSON.stringify({ scores: data }));
@@ -52,7 +48,7 @@ module.exports = function (app) {
 
 //--FUNCTIONS------------------------------------------------------------------
 
-function getScores(max){
+function getScores(max) {
 
 };
 
@@ -70,16 +66,18 @@ let accessDatabase = function (sql) {
             if (err) {
                 console.log(err);
                 reject('Connection failed');
+            } else {
+                console.log("Connected to Database");
             };
-            console.log("Connected to Database");
 
             connection.query(sql, function (err, rows, fields) {
                 if (err) {
                     console.log(err);
                     reject('Query failed');
+                } else {
+                    console.log('Data received');
+                    resolve(rows);
                 };
-
-                resolve(rows);
             });
             connection.end();
         });

@@ -42,6 +42,7 @@ module.exports = function (app) {
             end();
         }).catch(function (err) {
             console.log(err);
+            data.scores[0].user = 'Scores can not be loaded';
             end();
         });
 
