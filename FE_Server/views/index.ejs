@@ -13,7 +13,18 @@
     <main>
         <div id='wrapper'>
             <div id='scores'>
-                Scoreboard
+                <table class="scores">
+                    <tr>
+                        <th>Username</th>
+                        <th>Score</th>
+                    </tr>
+                    <% for(let i = 0; i < scores.length; i++) { %>
+                        <tr>
+                            <td><%= scores[i].user %></td>
+                            <td><%= scores[i].score %></td>
+                        </tr>
+                    <% } %>
+                </table>
             </div>
             <div id='right'>
                 <div id='login'>

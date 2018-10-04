@@ -5,6 +5,7 @@ const indexJSON = {
         content: '',
         type: '',
     },
+    scores: [],
 };
 
 const elseJSON = {
@@ -26,6 +27,11 @@ const cookieMsgData = {
     type: '',
 };
 
+// BackEndService
+const scoresJSON = {
+    max: 0,
+};
+
 module.exports = {
     json: {
         index: indexJSON,
@@ -35,5 +41,8 @@ module.exports = {
     cookie: {
         user: cookieUserData,
         msg: cookieMsgData,
+    },
+    service: {
+        scores: scoresJSON,
     },
 };

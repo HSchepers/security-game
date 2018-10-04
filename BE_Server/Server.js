@@ -2,12 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const content = require('./custom_modules/content_types');
 const fs = require('fs');
-const mysql = require('mysql');
-//const session = require('express-session');
 const constructors = require('./custom_modules/custom_constructors');
+const sqlController = require('./controllers/sql_controller');
 
 var app = express();
-var URLencodedParser = bodyParser.urlencoded({ extended: false })
+
 
 //--MIDDLEWARE-----------------------------------------------------------------
 //This piece of middleware will log the requests
@@ -39,15 +38,8 @@ app.use(bodyParser.json());
 //serve the requested file
 app.use('/assets', express.static('assets'));
 
-//--GET-REQUESTS---------------------------------------------------------------
-//verify that the server is online
-app.get('/', function (req, res) {
-  res.writeHead(200, content.plain);
-  res.end('This is the Back-End-Server');
-});
-
-//--POST-REQUESTS--------------------------------------------------------------
-
+//--CONTROLLERS----------------------------------------------------------------
+sqlController(app);
 
 //--404-Page-------------------------------------------------------------------
 //Dynamic Routing for everything that doesn't use one of the above
@@ -60,72 +52,3 @@ app.all('/:file', function (req, res) {
 app.listen(3001);
 
 //--FUNCTIONS------------------------------------------------------------------
-
-
-//--PROMISES-------------------------------------------------------------------
-let accessDatabase = function (sql) {
-  return new Promise(function (resolve, reject) {
-    var connection = mysql.createConnection({
-      host: "localhost",
-      user: "guest",
-      password: "login",
-      database: "securitygame"
-    });
-
-    connection.connect(function (err) {
-      if (err) throw err, reject('Connection failed');
-      console.log("Connected to Database");
-
-      connection.query(sql, function (err, rows, fields) {
-        if (err) throw err;
-
-        resolve(rows);
-      });
-      connection.end();
-    });
-  });
-};
-
-//--Dead Code------------------------------------------------------------------
-/*login
-app.post('/login', URLencodedParser, function (req, res) {
-  console.log('User: ', req.body.username);
-
-  var data = constructors.json.login;
-  data.success = false;
-  data.message = 'Could not connect to Database';
-  data.msg_type = 'error';
-
-  const username = req.body.username;
-  const password = req.body.password;
-
-  var sql = 'select count(user) as users from users where user = "' + username + '" and auth_string = password("' + password + '")';
-
-  accessDatabase(sql).then(function (result) {
-    //Access successful
-    console.log(result);
-
-    if (result[0].users == 1) {
-      //User found
-      data.success = true;
-      data.message = 'Login successful!';
-      data.msg_type = 'confirm'
-    } else {
-      //User not found
-      data.success = false;
-      data.message = 'The given credentials were invalid!';
-      data.msg_type = 'error';
-    };
-
-    res.writeHead(200, content.json);
-    res.end(JSON.stringify(data));
-
-  }).catch(function (msg) {
-    //Access failed
-    data.success = false;
-    data.message = msg;
-    data.msg_type = 'error';
-    res.writeHead(200, content.json);
-    res.end(JSON.stringify(data));
-  });
-});*/
