@@ -9,7 +9,7 @@
 
 <body>
     <% include includes/nav.html %>
-    
+
     <main>
         <div id='wrapper'>
             <div id='scores'>
@@ -19,32 +19,30 @@
                         <th>Score</th>
                     </tr>
                     <% for(let i = 0; i < scores.length; i++) { %>
-                        <tr>
-                            <td><%= scores[i].user %></td>
-                            <td><%= scores[i].score %></td>
-                        </tr>
+                    <tr>
+                        <td><%= scores[i].user %></td>
+                        <td><%= scores[i].score %></td>
+                    </tr>
                     <% } %>
                 </table>
             </div>
             <div id='right'>
                 <div id='login'>
+                    <h3>To play the Security-Game please enter a username</h3>
                     <form id="login_form" method="POST" action="http://localhost:3000/register">
                         <table class="login_table">
-                            <tr>
-                                <td colspan="2"><h3>To play the Security-Game please enter a username</h3></td>
-                            </tr>
                             <tr>
                                 <td colspan="2"><span class='<%= msg.type %>'><%= msg.content %></span></td>
                             </tr>
                             <tr>
                                 <td><label for="username">Username</label></td>
-                                <td><input type="text" name="username" value=""></td>
+                                <td><input type="text" name="username" placeholder="Username"></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><input type="submit" value="   Play   "></td>
                             </tr>
                         </table>
-                        </form>
+                    </form>
                 </div>
                 <div id=''>
                     empty tile
@@ -54,4 +52,5 @@
     </main>
     <% include includes/footer.html %>
 </body>
+
 </html>

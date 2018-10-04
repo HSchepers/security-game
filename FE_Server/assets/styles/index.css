@@ -15,7 +15,6 @@ td {
     margin: 0px;
     grid-gap: 5px;
     min-width: 100%;
-    min-height: 100%;
     align-self: center;
     grid-template-areas:
         "scores right";
@@ -24,7 +23,6 @@ td {
 #scores{
     grid-area: scores;
     margin: 0px;
-    background-color: cadetblue;
 }
 #right {
     grid-area: right;
@@ -43,5 +41,10 @@ td {
     align-self: center;
     justify-self: center;
     text-align: center;
-    background-color: cadetblue;
+}
+table{
+    width: 100%;
+}
+table > th,td{
+    width: 50%;
 }

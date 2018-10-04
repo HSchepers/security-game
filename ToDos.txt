@@ -7,3 +7,5 @@ Cookie-Mitteilung
 
 Back-End:
 protected routes
+
+JSON-Formate für BE-Aufrufe

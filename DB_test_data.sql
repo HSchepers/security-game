@@ -1,11 +1,11 @@
-insert into securitygame.scores values
-	(1, "HSchepers", 100),
-	(2, "HSchepers", 200),
-	(3, "HHoffmann", 300),
-	(4, "LTwenning", 400),
-	(5, "LTwenning", 150),
-	(6, "HSchepers", 720),
-	(7, "CHohmann", 430),
-	(8, "HHoffmann", 290),
-	(9, "HSchepers", 370),
-	(10, "CHohmann", 130);
+insert into securitygame.games values
+	(1, "HSchepers", 100, "00:05:43"),
+	(2, "HSchepers", 200, "00:05:43"),
+	(3, "HHoffmann", 300, "00:05:43"),
+	(4, "LTwenning", 400, "00:05:43"),
+	(5, "LTwenning", 150, "00:05:43"),
+	(6, "HSchepers", 720, "00:05:43"),
+	(7, "CHohmann", 430, "00:05:43"),
+	(8, "HHoffmann", 290, "00:05:43"),
+	(9, "HSchepers", 370, "00:05:43"),
+	(10, "CHohmann", 130, "00:05:43");

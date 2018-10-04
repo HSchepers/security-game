@@ -4,10 +4,10 @@
     margin: 0;
 }
 main{
-    background-color: cadetblue;
+    min-height: 95vh;
 }
 div{
-    border: 1px solid black;
+    border: 0px solid black;
 }
 nav{
     position: sticky;
@@ -22,12 +22,12 @@ nav{
 nav > #left{
     grid-area: left;
     margin: auto;
-    margin-left: 0;
+    margin-left: 2%;
 }
 nav > #right{
     grid-area: right;
     margin: auto;
-    margin-right: 0;
+    margin-right: 2%;
 }
 
 footer{

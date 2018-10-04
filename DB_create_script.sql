@@ -18,15 +18,31 @@ CREATE SCHEMA IF NOT EXISTS `securitygame` DEFAULT CHARACTER SET utf8 ;
 USE `securitygame` ;
 
 -- -----------------------------------------------------
--- Table `securitygame`.`scores`
+-- Table `securitygame`.`game`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `securitygame`.`scores` (
+CREATE TABLE IF NOT EXISTS `securitygame`.`games` (
   `id` INT NOT NULL,
   `user` VARCHAR(30) NOT NULL,
-  `score` INT NOT NULL,
+  `score` INT,
+  `time` time,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `securitygame`.`answers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `securitygame`.`answers` (
+  `f_game_id` INT NOT NULL,
+  `question_id` INT NOT NULL,
+  `answer` BOOLEAN NOT NULL,
+  PRIMARY KEY (`f_game_id`, `question_id`),
+  INDEX `fk_games_answers_idx` (`f_game_id` ASC),
+  CONSTRAINT `fk_games_answers1`
+    FOREIGN KEY (`f_game_id`)
+    REFERENCES `securitygame`.`games` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
