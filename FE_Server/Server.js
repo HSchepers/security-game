@@ -15,6 +15,7 @@ app.use('/', function (req, res, next) {
     console.log(req.method + ': ' + req.url);
     next(); //next piece of middleware
 });
+
 //Parses the text as JSON and exposes the resulting object on req.body.
 app.use(bodyParser.json());
 //Parses the Cookie and exposes the resulting object on req.cookies

@@ -15,13 +15,17 @@
             <div id='scores'>
                 <table class="scores">
                     <tr>
+                        <th>#</th>
                         <th>Username</th>
                         <th>Score</th>
+                        <th>Time</th>
                     </tr>
                     <% for(let i = 0; i < scores.length; i++) { %>
                     <tr>
+                        <td><%= scores[i].id %></td>
                         <td><%= scores[i].user %></td>
                         <td><%= scores[i].score %></td>
+                        <td><%= scores[i].time %></td>
                     </tr>
                     <% } %>
                 </table>
@@ -30,7 +34,7 @@
                 <div id='login'>
                     <h3>To play the Security-Game please enter a username</h3>
                     <form id="login_form" method="POST" action="http://localhost:3000/register">
-                        <table class="login_table">
+                        <table>
                             <tr>
                                 <td colspan="2"><span class='<%= msg.type %>'><%= msg.content %></span></td>
                             </tr>

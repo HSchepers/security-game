@@ -51,7 +51,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- Add guest user
 -- -----------------------------------------------------
-GRANT select, insert
+GRANT select, insert, update
   ON securitygame.*
   TO guest@localhost
   IDENTIFIED BY "login";

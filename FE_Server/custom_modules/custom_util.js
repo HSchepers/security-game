@@ -29,6 +29,14 @@ function getMsg(cookie) {
     return msg;
 };
 
+function getGameId(cookie) {
+    if(cookie){
+        return cookie.gameId;
+    } else {
+        return -1;
+    };
+}
+
 function usernameIsSet(cookie) {
     if (cookie) {
         if (cookie.username == '') {
@@ -72,6 +80,7 @@ module.exports = {
     fun: {
         getHeader: getHeader,
         getMsg: getMsg,
+        getGameId: getGameId,
         usernameIsSet: usernameIsSet,
     },
     promise: {
