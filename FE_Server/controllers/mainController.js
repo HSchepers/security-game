@@ -26,13 +26,13 @@ module.exports = function (app) {
         data.header_text = util.fun.getHeader(req.cookies.user);
 
         if (util.fun.usernameIsSet(req.cookies.user)) {
-            res.render('game', data);
+            res.redirect('https://game.twenska.de/game.html');
         } else {
             var cookieData = constructors.cookie.msg;
             cookieData.content = 'You must enter a username before playing the game';
             cookieData.type = 'error';
             res.cookie('msg', cookieData, { maxAge: 5000 })
-            res.redirect('/register');
+            res.redirect('https://game.twenska.de/fe/register');
         };
     });
 
@@ -77,7 +77,7 @@ module.exports = function (app) {
             console.log(err);
             console.log('User "%s" started the Game %s. User created: %s', username, gameId, false);
         });
-        res.redirect('/game');
+        res.redirect('https://game.twenska.de/game');
     });
 
     //--POST-REQUESTS----------------------------------------------------------
@@ -90,20 +90,20 @@ module.exports = function (app) {
             cookieData.content = 'The username must not be longer than 30 characters';
             cookieData.type = 'error';
             res.cookie('msg', cookieData, { maxAge: 5000 });
-            res.redirect('/register');
+            res.redirect('https://game.twenska.de/fe/register');
         } else if (username.length == 0) {
             var cookieData = constructors.cookie.msg;
             cookieData.content = 'You must enter a username before playing the game';
             cookieData.type = 'error';
             res.cookie('msg', cookieData, { maxAge: 5000 });
-            res.redirect('/register');
+            res.redirect('https://game.twenska.de/fe/register');
         } else {
             var cookieData = constructors.cookie.user;
             cookieData.username = username;
             cookieData.gameId = gameId;
             res.cookie('user', cookieData);
             gameId++;
-            res.redirect('/create-user');
+            res.redirect('https://game.twenska.de/fe/create-user');
         };
     });
 

@@ -7,7 +7,7 @@ const util = require('../custom_modules/custom_util');
 const URLencodedParser = bodyParser.urlencoded({ extended: false });
 //all routes that correspond to a .ejs-file with the same name
 //and do not require additional data to be displayed
-const routeMatchesView = ['game', 'about', 'help', 'developers', 'impressum'];
+const routeMatchesView = ['game', 'about', 'developers', 'impressum'];
 
 module.exports = function (app) {
 
@@ -28,16 +28,16 @@ module.exports = function (app) {
         /*If a cookie containig a username exists the user will be 
           redirected to '/game' otherwise to '/register' */
         if (util.fun.usernameIsSet(req.cookies.user)) {
-            res.redirect('/game');
+            res.redirect('https://game.twenska.de/game.html');
         } else {
-            res.redirect('/register');
+            res.redirect('https://game.twenska.de/fe/register');
         };
     });
 
     //change_username
     app.get('/change_username', function (req, res) {
         res.clearCookie('user');
-        res.redirect('/register');
+        res.redirect('https://game.twenska.de/fe/register');
     });
 
     //--POST-REQUESTS----------------------------------------------------------
