@@ -34,7 +34,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `securitygame`.`answers` (
   `f_game_id` INT NOT NULL,
   `question_id` INT NOT NULL,
-  `answer` BOOLEAN NOT NULL,
+  `answer` INT default 0,
   PRIMARY KEY (`f_game_id`, `question_id`),
   INDEX `fk_games_answers_idx` (`f_game_id` ASC),
   CONSTRAINT `fk_games_answers1`

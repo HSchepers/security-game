@@ -46,7 +46,7 @@ const startGameJSON = {
 const answerJSON = {
     gameId: 0,
     questionId: 0,
-    answer: true,
+    answer: 0,
 };
 
 const endGameJSON = {
