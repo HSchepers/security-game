@@ -77,7 +77,7 @@ module.exports = function (app) {
             console.log(err);
             console.log('User "%s" started the Game %s. User created: %s', username, gameId, false);
         });
-        res.redirect('https://game.twenska.de/game');
+        res.redirect('https://game.twenska.de/game.html');
     });
 
     //--POST-REQUESTS----------------------------------------------------------
