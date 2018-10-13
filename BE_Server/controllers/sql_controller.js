@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const constructors = require('../custom_modules/custom_constructors');
 
 const URLencodedParser = bodyParser.urlencoded({ extended: false })
+var sqlId = 1;
 
 module.exports = function (app) {
 
@@ -27,6 +28,59 @@ module.exports = function (app) {
         });
     });
 
+    //analyse
+    app.get('/analyse', function (req, res) {
+        var data = constructors.json.analyse;
+        const totalQuestionPromises = 1;
+        const totalElsePromises = 1;
+        const totalPromises = totalElsePromises + totalQuestionPromises;
+        var answeredPromises = 0;
+
+
+        var intervalAnswer = setInterval(function () {
+            //only respond once all promises have finished            
+            if (answeredPromises >= totalPromises) {
+                clearInterval(intervalAnswer);
+                console.log(data);
+
+                res.setHeader("200", content.json);
+                res.end(JSON.stringify(data));
+            };
+        }, 500);
+
+        //player data
+        const sqlPlayerData = 'SELECT * FROM securitygame.view_player_data;';
+
+        accessDatabase(sqlPlayerData).then(function (rows) {
+            data.player = rows[0];         
+            data.player.finishedPercent = Math.round(data.player.finishedPercent * 100);
+            answeredPromises++;
+        }).catch(function (err) {
+            console.log(err);
+            answeredPromises++;
+        });
+
+        //question data
+        const sqlQuestionData = 'SELECT id, totalAnswers, correctPercent, falsePercent, noAnswerPercent FROM securitygame.view_question_data';
+
+        accessDatabase(sqlQuestionData).then(function (rows) {
+            var questionData = [];
+            for (let i = 0; i < rows.length; i++) {
+                var element = rows[i];
+                element.id = mapId(element.id);
+                element.correctPercent = Math.round(element.correctPercent * 100);
+                element.falsePercent = Math.round(element.falsePercent * 100);
+                element.noAnswerPercent = Math.round(element.noAnswerPercent * 100);
+                questionData.push(element);
+            }
+            data.question = questionData;
+            answeredPromises++;
+        }).catch(function (err) {
+            console.log(err);
+            answeredPromises++;
+        });;
+    });
+
     //--POST-REQUESTS----------------------------------------------------------
     //scores
     app.post('/scores', URLencodedParser, function (req, res) {
@@ -39,10 +93,10 @@ module.exports = function (app) {
             var data = [];
 
             for (let i = 0; i < rows.length; i++) {
-                var entry = rows[i];
+                var element = rows[i];
 
-                entry.id = i + 1;
-                data.push(entry);
+                element.id = i + 1;
+                data.push(element);
 
                 if (max_lines == i) { break; };
             };
@@ -109,7 +163,7 @@ module.exports = function (app) {
         const gameId = req.body.gameId;
         const score = req.body.score;
         const time = req.body.time;
-        const sql = 'UPDATE securitygame.games SET score = ' + score + ', time = "' + time + '" WHERE id = ' + gameId+';';
+        const sql = 'UPDATE securitygame.games SET score = ' + score + ', time = "' + time + '" WHERE id = ' + gameId + ';';
 
         var data = constructors.json.update;
         res.setHeader("200", content.json);
@@ -127,34 +181,49 @@ module.exports = function (app) {
 };
 
 //--FUNCTIONS------------------------------------------------------------------
+function mapId(id) {
+    if (id == 1) {
+        return 'Ausweis';
+    } else if (id == 2) {
+        return 'Zertifikatswarnung';
+    } else if (id == 3) {
+        return 'Phishing';
+    } else if (id == 4) {
+        return 'Dokumente';
+    } else {
+        return 'no ID-Mapping';
+    }
+}
 
 
 //--PROMISES-------------------------------------------------------------------
 let accessDatabase = function (sql) {
-    console.log('SQL: ' + sql);
+    const ID = sqlId;
+    sqlId++;
+    console.log('SQL(ID %s): %s', ID, sql);
 
     return new Promise(function (resolve, reject) {
         var connection = mysql.createConnection({
             host: "localhost",
             user: "guest",
-            password: "login",
+            password: "Super-Safes-Passwort123",
             database: "securitygame"
         });
 
         connection.connect(function (err) {
             if (err) {
                 console.log(err);
-                reject('SQL: Connection failed');
+                reject('SQL(ID ' + ID + '): Connection failed');
             } else {
-                console.log("SQL: Connected to Database");
+                console.log('SQL(ID ' + ID + '): Connected to Database');
             };
 
             connection.query(sql, function (err, rows, fields) {
                 if (err) {
                     console.log(err);
-                    reject('SQL: Query failed');
+                    reject('SQL(ID ' + ID + '): Query failed');
                 } else {
-                    console.log('SQL: Query success');
+                    console.log('SQL(ID ' + ID + '): Query success');
                     resolve(rows);
                 };
             });

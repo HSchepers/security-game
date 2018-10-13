@@ -13,6 +13,17 @@ const indexJSON = {
     }],
 };
 
+const analyseJSON = {
+    header_text: '',
+    data: {
+        player: {
+            totalPlayers: 0,
+            finishedPercent: 0,
+        },
+        question: [],
+    },
+};
+
 const elseJSON = {
     header_text: '',
 };
@@ -58,6 +69,7 @@ const endGameJSON = {
 module.exports = {
     json: {
         index: indexJSON,
+        analyse: analyseJSON,
         else: elseJSON,
         notFound: notFoundJSON,
     },

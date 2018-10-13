@@ -40,6 +40,26 @@ module.exports = function (app) {
         res.redirect('https://game.twenska.de/fe/register');
     });
 
+    //analyse
+    app.get('/analyse', function(req, res){
+        var data = constructors.json.analyse;
+        data.header_text = util.fun.getHeader(req.cookies.user);
+
+        util.promise.get('analyse').then(function(get_res){
+            data.data = JSON.parse(get_res.body);            
+            res.render('analyse', data);
+        }).catch(function(err){
+            console.log(err);
+            res.render('analyse', data);
+        });
+
+
+        /*
+        data = constructors.json.analyse;
+        data.header_text = util.fun.getHeader(req.cookies.user);
+        res.render('analyse', data);*/
+    });
+
     //--POST-REQUESTS----------------------------------------------------------
 
     //--ALL-REQUESTS-----------------------------------------------------------

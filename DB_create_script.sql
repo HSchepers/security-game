@@ -44,6 +44,55 @@ CREATE TABLE IF NOT EXISTS `securitygame`.`answers` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- View `securitygame`.`view_player_data`
+-- -----------------------------------------------------
+CREATE VIEW view_player_data AS 
+SELECT MAX(id) AS totalPlayers,
+  ((SELECT COUNT(id)
+    FROM securitygame.games
+    WHERE time > 0) / MAX(id)) AS finishedPercent 
+FROM securitygame.games;
+
+-- -----------------------------------------------------
+-- View `securitygame`.`view_correct_answers_per_question`
+-- View `securitygame`.`view_false_answers_per_question`
+-- View `securitygame`.`view_no_answer_given_per_question`
+-- View `securitygame`.`view_question_data`
+-- -----------------------------------------------------
+CREATE VIEW view_correct_answers_per_question AS
+  SELECT question_id, COUNT(answer) AS correctAnswers
+  FROM securitygame.answers
+  WHERE answer = 1
+  GROUP BY question_id;
+
+CREATE VIEW view_false_answers_per_question AS
+  SELECT question_id, COUNT(answer) AS falseAnswers
+  FROM securitygame.answers
+  WHERE answer = 2
+  GROUP BY question_id;
+
+CREATE VIEW view_no_answer_given_per_question AS
+  SELECT question_id, COUNT(answer) AS noAnswer
+  FROM securitygame.answers
+  WHERE answer = 0
+  GROUP BY question_id;
+
+CREATE VIEW view_question_data AS
+  SELECT c.question_id AS id,
+	(c.correctAnswers+f.falseAnswers+n.noAnswer) AS totalAnswers,
+  c.correctAnswers,
+  (c.correctAnswers / (c.correctAnswers+f.falseAnswers+n.noAnswer)) AS correctPercent,
+  f.falseAnswers,
+  (f.falseAnswers / (c.correctAnswers+f.falseAnswers+n.noAnswer)) AS falsePercent,
+  n.noAnswer,
+  (n.noAnswer / (c.correctAnswers+f.falseAnswers+n.noAnswer)) AS noAnswerPercent
+  FROM securitygame.view_correct_answers_per_question AS c
+  JOIN securitygame.view_false_answers_per_question AS f
+  ON c.question_id = f.question_id
+  JOIN securitygame.view_no_answer_given_per_question AS n
+  ON f.question_id = n.question_id;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -51,7 +100,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- Add guest user
 -- -----------------------------------------------------
-GRANT select, insert, update
+GRANT select, insert, update, delete
   ON securitygame.*
   TO guest@localhost
-  IDENTIFIED BY "login";
+  IDENTIFIED BY "Super-Safes-Passwort123";

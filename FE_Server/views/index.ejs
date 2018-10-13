@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Security Game - Login</title>
+    <title>Security Game - Registrieren</title>
     <meta charset="UTF-8">
     <link href="assets/styles/index.css" rel="stylesheet" type="text/css">
 </head>
@@ -16,9 +16,9 @@
                 <table class="scores">
                     <tr>
                         <th>#</th>
-                        <th>Username</th>
-                        <th>Score</th>
-                        <th>Time</th>
+                        <th>Benutzername</th>
+                        <th>Punktzahl</th>
+                        <th>Zeit</th>
                     </tr>
                     <% for(let i = 0; i < scores.length; i++) { %>
                     <tr>
@@ -32,24 +32,24 @@
             </div>
             <div id='right'>
                 <div id='login'>
-                    <h3>To play the Security-Game please enter a username</h3>
+                    <h3>Bitte gib einen Benutzernamen ein, um das Spiel spielen zu können</h3>
                     <form id="login_form" method="POST" action="https://game.twenska.de/fe/register">
                         <table>
                             <tr>
                                 <td colspan="2"><span class='<%= msg.type %>'><%= msg.content %></span></td>
                             </tr>
                             <tr>
-                                <td><label for="username">Username</label></td>
-                                <td><input type="text" name="username" placeholder="Username"></td>
+                                <td><label for="username">Benutzername</label></td>
+                                <td><input type="text" name="username" placeholder="Benutzername"></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><input type="submit" value="   Play   "></td>
+                                <td colspan="2"><input type="submit" value="   Spielen   "></td>
                             </tr>
                         </table>
                     </form>
                 </div>
                 <div id=''>
-                    empty tile
+                    div ohne Inhalt
                 </div>
             </div>
         </div>

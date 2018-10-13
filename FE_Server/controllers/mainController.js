@@ -29,7 +29,7 @@ module.exports = function (app) {
             res.redirect('https://game.twenska.de/game.html');
         } else {
             var cookieData = constructors.cookie.msg;
-            cookieData.content = 'You must enter a username before playing the game';
+            cookieData.content = 'Du musst zuerst einen Benutzernamen eingeben';
             cookieData.type = 'error';
             res.cookie('msg', cookieData, { maxAge: 5000 })
             res.redirect('https://game.twenska.de/fe/register');
@@ -53,7 +53,7 @@ module.exports = function (app) {
             end();
         }).catch(function (err) {
             console.log(err);
-            data.scores[0].user = 'Scores can not be loaded';
+            data.scores[0].user = 'Statistiken können nicht abgerufen werden';
             end();
         });
 
@@ -87,13 +87,13 @@ module.exports = function (app) {
 
         if (username.length > 30) {
             var cookieData = constructors.cookie.msg;
-            cookieData.content = 'The username must not be longer than 30 characters';
+            cookieData.content = 'Der Benutzername darf maximal 30 Zeichen haben';
             cookieData.type = 'error';
             res.cookie('msg', cookieData, { maxAge: 5000 });
             res.redirect('https://game.twenska.de/fe/register');
         } else if (username.length == 0) {
             var cookieData = constructors.cookie.msg;
-            cookieData.content = 'You must enter a username before playing the game';
+            cookieData.content = 'Du musst zuerst einen Benutzernamen eingeben';
             cookieData.type = 'error';
             res.cookie('msg', cookieData, { maxAge: 5000 });
             res.redirect('https://game.twenska.de/fe/register');
@@ -109,7 +109,7 @@ module.exports = function (app) {
 
 
 
-    //--TESTS----------------------------------------------------------------------
+    /*--TESTS----------------------------------------------------------------------
     app.get('/test/:service', function (req, res) {
         if (req.params.service == 'answer') {
             //test/answer
@@ -165,7 +165,7 @@ module.exports = function (app) {
         } else {
             res.end();
         };
-    });
+    });*/
 
 };
 

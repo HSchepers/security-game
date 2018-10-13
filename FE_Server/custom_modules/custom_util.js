@@ -8,12 +8,12 @@ function getHeader(cookie) {
     if (cookie) {
         const user = cookie.username;
         if (user == '') {
-            return 'No username';
+            return 'Kein Name';
         } else {
-            return 'Username: ' + user;
+            return 'Name: ' + user;
         };
     } else {
-        return 'No username';
+        return 'Kein Name';
     };
 };
 

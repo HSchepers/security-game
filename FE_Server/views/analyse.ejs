@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Security Game - Analyse</title>
+    <meta charset="UTF-8">
+    <link href="assets/styles/analyse.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <% include includes/nav.html %>
+
+    <main>
+        <div id="head">
+            <h2>Auswertung der Ergebnisse</h2>
+        </div>
+        <div id="wrapper">
+            <div id="left">
+                <table id="player">
+                    <tr>
+                        <th colspan="2">Spielerzahl</th>
+                    </tr>
+                    <tr>
+                        <td>gesamt:</td>
+                        <td>
+                            <%= data.player.totalPlayers %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Abschlussquote:</td>
+                        <td>
+                            <%= data.player.finishedPercent %> %</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="right">
+                <table id="question">
+                    <tr>
+                        <th>Frage</th>
+                        <th>Antworten (Gesamt)</th>
+                        <th>richtig beantwortet</th>
+                        <th>falsch beantwortet</th>
+                        <th>nicht beantwortet</th>
+                    </tr>
+                    <% for(let i = 0; i < data.question.length; i++){ %>
+                    <tr>
+                        <td>
+                            <%= data.question[i].id %>
+                        </td>
+                        <td>
+                            <%= data.question[i].totalAnswers %>
+                        </td>
+                        <td>
+                            <%= data.question[i].correctPercent %> %</td>
+                        <td>
+                            <%= data.question[i].falsePercent %> %</td>
+                        <td>
+                            <%= data.question[i].noAnswerPercent %> %</td>
+                    </tr>
+                    <% } %>
+                </table>
+            </div>
+        </div>
+        <div id="graph">
+            Graph
+        </div>
+    </main>
+
+    <% include includes/footer.html %>
+</body>
+
+</html>

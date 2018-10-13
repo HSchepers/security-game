@@ -21,6 +21,22 @@ const loginJSON = {
  const deleteJSON ={
     success: false,
  };
+ const analyseJSON ={
+    player: {
+        totalPlayers: 0,
+        finishedPercent: 0.00,
+    },
+    question: [],
+};
+
+//arrayObjects
+const questionElement =         {
+    id: 0,
+    totalAnswers: 0,
+    correctPercent: 0.00,
+    falsePercent: 0.00,
+    noAnswerPercent: 0.00,
+};
 
  module.exports = {
      json:{
@@ -30,5 +46,9 @@ const loginJSON = {
         insert: insertJSON,
         update: updateJSON,
         delete: deleteJSON,
+        analyse: analyseJSON,
+     },
+     arrayElement: {
+        question: questionElement,
      },
   };
