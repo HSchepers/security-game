@@ -62,25 +62,38 @@
             </div>
         </div>
         <div id="graph">
+            <div id="graph-data">
+                <div id="question" style="padding: 0; padding-right: 5px">
+                    <b>Frage</b>
+                </div>
+                <div id="data">
+                    <div id="correct" style="width: 33.33%; padding: 0;">
+                        <b>richtige Antworten</b>
+                    </div>
+                    <div id="wrong" style="width: 33.33%; padding: 0">
+                        <b>falsche Antworten</b>
+                    </div>
+                    <div id="no-answer" style="width: 33.33%; padding: 0">
+                        <b>keine Antwort</b>
+                    </div>
+                </div>
+            </div>
             <% for(let i = 0; i < data.question.length; i++){ %>
             <div id="graph-data">
                 <div id="question">
-                    <span>
-                        <%= data.question[i].id %>
-                    </span>
+                    <%= data.question[i].id %>
                 </div>
                 <div id="data">
-                        <div id="correct" style="width: <%= data.question[i].correctPercent %>%">
-                            <b><%= data.question[i].correctPercent %> %</b>
-                        </div>
-                        <div id="wrong" style="width: <%= data.question[i].falsePercent %>%">
-                            <b><%= data.question[i].falsePercent %> %</b>
-                        </div>
-                        <div id="no-answer" style="width: <%= data.question[i].noAnswerPercent %>%">
-                            <b><%= data.question[i].noAnswerPercent %> %</b>
-                        </div>
+                    <div id="correct" style="width: <%= data.question[i].correctPercent %>%">
+                        <b><%= data.question[i].correctPercent %> %</b>
+                    </div>
+                    <div id="wrong" style="width: <%= data.question[i].falsePercent %>%">
+                        <b><%= data.question[i].falsePercent %> %</b>
+                    </div>
+                    <div id="no-answer" style="width: <%= data.question[i].noAnswerPercent %>%">
+                        <b><%= data.question[i].noAnswerPercent %> %</b>
+                    </div>
                 </div>
-                </b>
             </div>
             <% } %>
         </div>
