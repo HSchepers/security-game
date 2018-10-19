@@ -107,19 +107,16 @@ module.exports = function (app) {
         };
     });
 
-
-
-    /*--TESTS----------------------------------------------------------------------
-    app.get('/test/:service', function (req, res) {
+    //Service
+    app.post('/service/:service', URLencodedParser, function (req, res) {
         if (req.params.service == 'answer') {
-            //test/answer
+            //service/answer
             const gameId = util.fun.getGameId(req.cookies.user);
             if (gameId >= 0) {
-                var post_json = constructors.service.answer;
+                let post_json = req.body;
                 post_json.gameId = gameId;
-                post_json.questionId = 1;
-                post_json.answer = false;
-
+                //post_json.questionId = 1;
+                //post_json.answer = false;
                 
                 util.promise.post('answer', post_json).then(function (post_res) {
                     console.log(post_res.body);
@@ -133,18 +130,14 @@ module.exports = function (app) {
                 res.end();
             };
 
-
-
-
-
         } else if (req.params.service == 'end') {
-            //test/end
+            //service/end
             const gameId = util.fun.getGameId(req.cookies.user);
             if (gameId >= 0) {
-                var post_json = constructors.service.endGame;
+                let post_json = req.body;
                 post_json.gameId = gameId;
-                post_json.score = '999';
-                post_json.time = '00:12:45';
+                //post_json.score = '999';
+                //post_json.time = '00:12:45';
 
                 util.promise.post('end-game', post_json).then(function (post_res) {
                     console.log(post_res.body);
@@ -158,14 +151,10 @@ module.exports = function (app) {
                 res.end();
             };
 
-
-
-
-
         } else {
             res.end();
         };
-    });*/
+    });
 
 };
 
