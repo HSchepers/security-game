@@ -41,7 +41,6 @@ module.exports = function (app) {
             //only respond once all promises have finished            
             if (answeredPromises >= totalPromises) {
                 clearInterval(intervalAnswer);
-                console.log(data);
 
                 res.setHeader("200", content.json);
                 res.end(JSON.stringify(data));
@@ -50,7 +49,6 @@ module.exports = function (app) {
 
         //player data
         const sqlPlayerData = 'SELECT * FROM securitygame.view_player_data;';
-
         accessDatabase(sqlPlayerData).then(function (rows) {
             data.player = rows[0];         
             data.player.finishedPercent = Math.round(data.player.finishedPercent * 100);
@@ -62,7 +60,6 @@ module.exports = function (app) {
 
         //question data
         const sqlQuestionData = 'SELECT id, totalAnswers, correctPercent, falsePercent, noAnswerPercent FROM securitygame.view_question_data';
-
         accessDatabase(sqlQuestionData).then(function (rows) {
             var questionData = [];
             for (let i = 0; i < rows.length; i++) {
