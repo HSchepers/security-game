@@ -107,7 +107,7 @@ module.exports = function (app) {
         };
     });
 
-    //Service
+    /*Service //Testing purpose
     app.post('/service/:service', URLencodedParser, function (req, res) {
         if (req.params.service == 'answer') {
             //service/answer
@@ -155,6 +155,7 @@ module.exports = function (app) {
             res.end();
         };
     });
+    */
 
 };
 
